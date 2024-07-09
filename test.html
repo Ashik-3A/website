@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Appointment Booking</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+        }
+        .filter-section {
+            padding: 20px;
+            text-align: center;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .filter-section button {
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .filter-section button.active {
+            background-color: #45a049;
+        }
+        .doctor-cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            padding: 20px;
+        }
+        .doctor-card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            width: 300px;
+            margin: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .doctor-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .doctor-card .info {
+            padding: 20px;
+        }
+        .doctor-card .info h2 {
+            margin: 0 0 10px 0;
+            font-size: 22px;
+        }
+        .doctor-card .info p {
+            margin: 0;
+            font-size: 16px;
+        }
+        .doctor-card .info .ratings {
+            margin: 10px 0;
+        }
+        .doctor-card .info .ratings span {
+            color: gold;
+        }
+        .doctor-card .info .ratings small {
+            color: #888;
+        }
+        .doctor-card .info .additional-info {
+            margin: 10px 0;
+            font-size: 14px;
+            color: #555;
+        }
+        .doctor-card .info .book-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            text-align: center;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+            text-decoration: none;
+        }
+        .doctor-card .info .book-btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>Doctor Appointment Booking</h1>
+</div>
+
+<div class="filter-section">
+    <button onclick="filterDoctors('')">All</button>
+    <button onclick="filterDoctors('Cardiologist')">Cardiologist</button>
+    <button onclick="filterDoctors('Dermatologist')">Dermatologist</button>
+    <button onclick="filterDoctors('Neurologist')">Neurologist</button>
+    <button onclick="filterDoctors('Pediatrician')">Pediatrician</button>
+</div>
+
+<div class="doctor-cards" id="doctorCards">
+    <!-- Doctor Card Example -->
+    <div class="doctor-card" data-specialty="Cardiologist">
+        <img src="https://ik.imagekit.io/zawdck7lf/ippo/Brand_Images/Blue%20&%20Purple%20gradient%20company%20profile%20twitter%20header_a0COKTM0c.png?updatedAt=1719525699039" alt="Doctor Image">
+        <div class="info">
+            <h2>Dr. John Doe</h2>
+            <p>Cardiologist</p>
+            <p>City Hospital</p>
+            <div class="ratings">
+                <span>★★★★☆</span>
+                <small>(150 ratings)</small>
+            </div>
+            <p class="additional-info">Specializes in heart conditions and surgeries.</p>
+            <a href="#" class="book-btn">Book Appointment</a>
+        </div>
+    </div>
+    
+        <div class="doctor-card" data-specialty="Dermatologist">
+        <img src="https://ik.imagekit.io/zawdck7lf/ippo/Brand_Images/Blue%20&%20Purple%20gradient%20company%20profile%20twitter%20header_a0COKTM0c.png?updatedAt=1719525699039" alt="Doctor Image">
+        <div class="info">
+            <h2>Dr. A</h2>
+            <p>Cardiologist</p>
+            <p>City Hospital</p>
+            <div class="ratings">
+                <span>★★★★☆</span>
+                <small>(150 ratings)</small>
+            </div>
+            <p class="additional-info">Specializes in heart conditions and surgeries.</p>
+            <a href="#" class="book-btn">Book Appointment</a>
+        </div>
+    </div>
+    
+        <div class="doctor-card" data-specialty="Neurologist">
+        <img src="https://ik.imagekit.io/zawdck7lf/ippo/Brand_Images/Blue%20&%20Purple%20gradient%20company%20profile%20twitter%20header_a0COKTM0c.png?updatedAt=1719525699039" alt="Doctor Image">
+        <div class="info">
+            <h2>Dr. B</h2>
+            <p>Cardiologist</p>
+            <p>City Hospital</p>
+            <div class="ratings">
+                <span>★★★★☆</span>
+                <small>(150 ratings)</small>
+            </div>
+            <p class="additional-info">Specializes in heart conditions and surgeries.</p>
+            <a href="#" class="book-btn">Book Appointment</a>
+        </div>
+    </div>
+    
+    
+    <!-- Add more doctor cards as needed -->
+</div>
+
+<script>
+    function filterDoctors(specialty) {
+        const cards = document.querySelectorAll('.doctor-card');
+        cards.forEach(card => {
+            const doctorSpecialty = card.getAttribute('data-specialty');
+            if (specialty === "" || doctorSpecialty === specialty) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+
+        const buttons = document.querySelectorAll('.filter-section button');
+        buttons.forEach(button => {
+            button.classList.remove('active');
+        });
+
+        if (specialty === "") {
+            buttons[0].classList.add('active');
+        } else {
+            document.querySelector(`button[onclick="filterDoctors('${specialty}')"]`).classList.add('active');
+        }
+    }
+</script>
+
+</body>
+</html>
